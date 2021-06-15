@@ -53,11 +53,11 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn test --watchAll=false" 
+      "pre-push": "yarn run test --watchAll=false" 
     }
   },
   "lint-staged": {
-    "src/**/*.{js,ts,tsx}": "yarn lint"
+    "src/**/*.{js,ts,tsx}": "yarn run lint"
   },
   "scripts": {
     "start": "react-scripts start",
