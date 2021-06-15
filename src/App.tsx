@@ -2,8 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const ap2p2sss2 = 33;
-
 function App() {
   return (
     <div className="App">
@@ -18,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          another React
         </a>
       </header>
     </div>
