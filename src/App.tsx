@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const app = 33;
+const app22 = 33;
 
 function App() {
   return (
