@@ -1,0 +1,30 @@
+.card-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-form__header {
+  align-self: flex-start;
+  margin: 2rem 1.3rem 1.3rem 1.6rem;
+}
+
+.card-form__header-title {
+  padding-left: 1rem;
+}
+
+.card-form__header-button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.card-form__body {
+  padding: 1rem;
+}
+
+.card-form__footer {
+  padding: 1rem;
+}
