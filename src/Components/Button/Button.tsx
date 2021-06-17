@@ -5,8 +5,8 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 interface ButtonType {
-  className: string;
-  type: 'button' | 'submit' | 'reset';
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
 }
 
