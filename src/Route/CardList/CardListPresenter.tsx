@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './CardList.scss';
+import './CardList.module.scss';
 
 const CardListPresenter = () => {
   return (
