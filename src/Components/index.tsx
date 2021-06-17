@@ -1,1 +1,1 @@
-export { ColorButton } from './ColorButton/ColorButton';
+export { ColorButton } from './ColorButton';
