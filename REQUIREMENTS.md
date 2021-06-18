@@ -27,8 +27,8 @@
         year: ''
     },
     OwnerName: '',
-    Password: '',
     CVC: '',
+    Password: '',
     nickname: ''
 }
 ```

@@ -1,0 +1,18 @@
+.input-form {
+  width: 100%;
+  text-align: left;
+  margin-top: 1.5rem;
+  &__header {
+    display: grid;
+    grid-template-columns: 35% 65%;
+
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    &-title {
+      font-weight: bold;
+    }
+    &-validation-message {
+      color: red;
+    }
+  }
+}

@@ -1,6 +1,22 @@
-import React from 'react';
-import styles from './Input.module.scss';
+// import React, { forwardRef } from 'react';
+// import styles from './Input.module.scss';
+// import classNames from 'classnames/bind';
 
-export const Input = () => {
-  return <div className={styles.Input__Wrapper}>Color div</div>;
-};
+// const cx = classNames.bind(styles);
+
+export interface InputProps {
+  className?: string | undefined;
+  placeholder?: string | undefined;
+  width?: string | undefined;
+}
+
+// export const Input = forwardRef(({ className = '', placeholder = '', width = '' }: InputProps, ref: any) => {
+//   return (
+//     <input
+//       className={cx('input-container', className)}
+//       placeholder={placeholder}
+//       style={{ width: `${width}` }}
+//       ref={ref}
+//     />
+//   );
+// });
