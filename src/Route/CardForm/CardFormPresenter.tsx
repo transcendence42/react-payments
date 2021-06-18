@@ -16,7 +16,7 @@ const CardFormPresenter = () => {
         <span className="card-form__header-title">카드 추가</span>
       </div>
       <div className="card-form__body">
-        <Card></Card>
+        <Card onClick={hi}></Card>
       </div>
       <div className="card-form__footer">
         <Button className="card-form__footer-button" type="submit">
