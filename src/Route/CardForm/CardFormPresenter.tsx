@@ -9,13 +9,37 @@ const CardFormBodyNumber = ({ onChange }: { onChange: any }) => {
       inputFormTitle="카드번호"
       inputFormErrorMessage="error message"
     >
-      <Input className="card-form__body-number-input" name="numberFirst" onChange={onChange} placeholder="_ _ _ _" />
+      <Input
+        className="card-form__body-number-input"
+        name="numberFirst"
+        onChange={onChange}
+        placeholder="_ _ _ _"
+        maxLength={4}
+      />
       <span className="card-form__body-number-seperator">-</span>
-      <Input className="card-form__body-number-input" name="numberSecond" onChange={onChange} placeholder="_ _ _ _" />
+      <Input
+        className="card-form__body-number-input"
+        name="numberSecond"
+        onChange={onChange}
+        placeholder="_ _ _ _"
+        maxLength={4}
+      />
       <span className="card-form__body-number-seperator">-</span>
-      <Input className="card-form__body-number-input" name="numberThird" onChange={onChange} placeholder="_ _ _ _" />
+      <Input
+        className="card-form__body-number-input"
+        name="numberThird"
+        onChange={onChange}
+        placeholder="_ _ _ _"
+        maxLength={4}
+      />
       <span className="card-form__body-number-seperator">-</span>
-      <Input className="card-form__body-number-input" name="numberFourth" onChange={onChange} placeholder="_ _ _ _" />
+      <Input
+        className="card-form__body-number-input"
+        name="numberFourth"
+        onChange={onChange}
+        placeholder="_ _ _ _"
+        maxLength={4}
+      />
     </InputForm>
   );
 };
@@ -34,6 +58,7 @@ const CardFormExpirationDate = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         width="1.5rem"
         placeholder="MM"
+        maxLength={2}
       />
       <span className="card-form__body-expiration-date-seperator">/</span>
       <Input
@@ -42,6 +67,7 @@ const CardFormExpirationDate = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         width="1.5rem"
         placeholder="YY"
+        maxLength={2}
       />
     </InputForm>
   );
@@ -60,6 +86,7 @@ const CardFormOwnerName = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         width="19rem"
+        maxLength={20}
       />
     </InputForm>
   );
@@ -73,7 +100,14 @@ const CardFormCVC = ({ onChange }: { onChange: any }) => {
       inputFormErrorMessage="error message"
       containerWidth="3.2rem"
     >
-      <Input className="card-form__body-cvc-input" name="cvc" onChange={onChange} placeholder="CVC" width="2rem" />
+      <Input
+        className="card-form__body-cvc-input"
+        name="cvc"
+        onChange={onChange}
+        placeholder="CVC"
+        width="2rem"
+        maxLength={3}
+      />
     </InputForm>
   );
 };
@@ -92,6 +126,7 @@ const CardFormPassword = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         placeholder="_"
         width="1rem"
+        maxLength={1}
       />
       <Input
         className="card-form__body-password-input"
@@ -99,6 +134,7 @@ const CardFormPassword = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         placeholder="_"
         width="1rem"
+        maxLength={1}
       />
       <Input
         className="card-form__body-password-input"
@@ -106,6 +142,7 @@ const CardFormPassword = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         placeholder="_"
         width="1rem"
+        maxLength={1}
       />
       <Input
         className="card-form__body-password-input"
@@ -113,6 +150,7 @@ const CardFormPassword = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         placeholder="_"
         width="1rem"
+        maxLength={1}
       />
     </InputForm>
   );

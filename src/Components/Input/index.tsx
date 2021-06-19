@@ -12,6 +12,31 @@ export interface InputProps {
   placeholder?: string | undefined;
   width?: string | undefined;
   onChange?: any;
+  maxLength?: number;
+  type?:
+    | 'button'
+    | 'checkbox'
+    | 'color'
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'file'
+    | 'hidden'
+    | 'image'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'radio'
+    | 'range'
+    | 'reset'
+    | 'search'
+    | 'submit'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url'
+    | 'week'
+    | 'datetime';
 }
 
 // const Input = forwardRef(({ className = '', placeholder = '', width = '' }: InputProps, ref: any) => {
@@ -27,7 +52,15 @@ export interface InputProps {
 
 // Input.displayName = 'holee-input';
 
-const Input = ({ className = '', name = '', onChange, placeholder = '', width = '' }: InputProps) => {
+const Input = ({
+  className = '',
+  name = '',
+  onChange,
+  placeholder = '',
+  width = '',
+  maxLength,
+  type = 'text',
+}: InputProps) => {
   return (
     <input
       className={cx('input-container', className)}
@@ -35,6 +68,8 @@ const Input = ({ className = '', name = '', onChange, placeholder = '', width = 
       onChange={onChange}
       placeholder={placeholder}
       style={{ width: `${width}` }}
+      type={type}
+      maxLength={maxLength}
     />
   );
 };
