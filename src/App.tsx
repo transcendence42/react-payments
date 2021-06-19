@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
 import './App.scss';
 import { ROUTE } from './Constants';
-import CardList from './Route/CardList';
 import CardForm from './Route/CardForm';
 
 const App: React.FC = () => {
@@ -12,7 +11,7 @@ const App: React.FC = () => {
         <Router>
           <Switch>
             <Route exact path={[ROUTE.HOME, ROUTE.CARD_LIST]}>
-              <CardList />
+              <CardForm />
             </Route>
             <Route path={ROUTE.CARD_FORM}>
               <CardForm />
