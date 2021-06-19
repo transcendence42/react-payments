@@ -4,7 +4,7 @@ import './Card.scss';
 const CardHeader = ({ children }: { children: string | undefined }) => {
   return (
     <div className="card-header">
-      <div className="card-header__text">{children ? children : ''}</div>
+      <div className="card-header__text">{children ? children : ''} 카드</div>
     </div>
   );
 };
@@ -41,17 +41,17 @@ const CardBody = ({
 };
 
 interface CardFooterProps {
-  name?: string | undefined;
-  month?: string | undefined;
-  year?: string | undefined;
+  name: string | undefined;
+  month: string | undefined;
+  year: string | undefined;
 }
 
-const CardFooter = ({ name = 'NAME', month = 'MM', year = 'YY' }: CardFooterProps) => {
+const CardFooter = ({ name, month, year }: CardFooterProps) => {
   return (
     <div className="card-footer">
-      <span className="card-footer__name">{name}</span>
+      <span className="card-footer__name">{name ? name : 'NAME'}</span>
       <span className="card-footer__expiration-date">
-        {month}/{year}
+        {month ? month : 'MM'}/{year ? year : 'YY'}
       </span>
     </div>
   );
@@ -63,19 +63,21 @@ export interface CardProps {
   className?: string;
   onClick?: any;
   onKeyUp?: any;
+  cardColor: string;
   cardHeaderText?: string;
-  cardBodyNumberFirst?: string;
-  cardBodyNumberSecond?: string;
-  cardBodyNumberThird?: string;
-  cardBodyNumberFourth?: string;
-  cardFooterName?: string;
-  cardFooterMonth?: string;
-  cardFooterYear?: string;
+  cardBodyNumberFirst: string | undefined;
+  cardBodyNumberSecond: string | undefined;
+  cardBodyNumberThird: string | undefined;
+  cardBodyNumberFourth: string | undefined;
+  cardFooterName: string | undefined;
+  cardFooterMonth: string | undefined;
+  cardFooterYear: string | undefined;
 }
 
 export const Card = ({
   onClick,
   onKeyUp,
+  cardColor,
   cardHeaderText,
   cardBodyNumberFirst,
   cardBodyNumberSecond,
@@ -86,8 +88,17 @@ export const Card = ({
   cardFooterYear,
   ...rest
 }: CardProps) => {
+  const color = cardColor ? cardColor : '#d2d2d2';
   return (
-    <div className="card" onClick={onClick} role="button" tabIndex={0} onKeyUp={onKeyUp} {...rest}>
+    <div
+      className="card"
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyUp={onKeyUp}
+      style={{ backgroundColor: color }}
+      {...rest}
+    >
       <CardHeader>{cardHeaderText}</CardHeader>
       <CardBody
         cardBodyNumberFirst={cardBodyNumberFirst}

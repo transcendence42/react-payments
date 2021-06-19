@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Button, Input, InputForm } from '../../Components';
+import React, { useEffect, useState } from 'react';
+import { Card, Button, Input, InputForm, Portal } from '../../Components';
 import './CardForm.scss';
 
 const CardFormBodyNumber = ({ onChange }: { onChange: any }) => {
@@ -118,10 +118,48 @@ const CardFormPassword = ({ onChange }: { onChange: any }) => {
   );
 };
 
-const CardFormPresenter = () => {
+const CardCompanyItem = ({ color, name, onClick }: { color: string; name: string; onClick: any }) => {
+  return (
+    <div className="card-company-item">
+      <button
+        className="card-company-item__color"
+        style={{ backgroundColor: color }}
+        onClick={onClick}
+        data-company={name}
+        data-color={color}
+      ></button>
+      <p className="card-company-item__name">{name}</p>
+    </div>
+  );
+};
+
+const CardModal = ({ data, onClick }: { data: CardModalProps[]; onClick?: any }) => {
+  return (
+    <Portal>
+      <div className="portal">
+        <div className="card-list">
+          {data.map(({ name, color }) => (
+            <CardCompanyItem key={name} name={name} color={color} onClick={onClick} />
+          ))}
+        </div>
+      </div>
+    </Portal>
+  );
+};
+
+interface CardModalProps {
+  color: string;
+  name: string;
+}
+
+interface CardFormPresenterProps {
+  data: CardModalProps[];
+}
+
+const CardFormPresenter = ({ data }: CardFormPresenterProps) => {
   const [cardFormInputs, setCardFormInputs] = useState({
-    typeName: '',
-    typeColor: '',
+    companyName: '',
+    companyColor: '',
     numberFirst: '',
     numberSecond: '',
     numberThird: '',
@@ -135,12 +173,32 @@ const CardFormPresenter = () => {
     passwordThird: '',
     passwordFourth: '',
     nickname: '',
+    openPortal: false,
   });
+
+  useEffect(() => {
+    if (cardFormInputs.numberFirst.length === 4 && cardFormInputs.numberSecond.length === 4) {
+      setCardFormInputs((prev) => ({ ...prev, openPortal: true }));
+    }
+    return () => {
+      setCardFormInputs((prev) => ({ ...prev, openPortal: false }));
+    };
+  }, [cardFormInputs.numberFirst, cardFormInputs.numberSecond]);
 
   const handleChangeCardInfo = (e: Event) => {
     const { value, name } = e.target as HTMLInputElement;
     setCardFormInputs((prev) => ({ ...prev, [name]: value }));
     console.log(cardFormInputs);
+  };
+
+  const handleClickCardCompanyItem = (e: any) => {
+    e.persist();
+    setCardFormInputs((prev) => ({
+      ...prev,
+      companyName: e.target.dataset.company,
+      companyColor: e.target.dataset.color,
+      openPortal: false,
+    }));
   };
 
   return (
@@ -153,6 +211,8 @@ const CardFormPresenter = () => {
       </div>
       <div className="card-form__body">
         <Card
+          cardColor={cardFormInputs.companyColor}
+          cardHeaderText={cardFormInputs.companyName}
           cardBodyNumberFirst={cardFormInputs.numberFirst}
           cardBodyNumberSecond={cardFormInputs.numberSecond}
           cardBodyNumberThird={cardFormInputs.numberThird}
@@ -172,6 +232,7 @@ const CardFormPresenter = () => {
           제출 완료
         </Button>
       </div>
+      {cardFormInputs.openPortal ? <CardModal data={data} onClick={handleClickCardCompanyItem} /> : ''}
     </div>
   );
 };

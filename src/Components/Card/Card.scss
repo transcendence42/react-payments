@@ -1,5 +1,5 @@
 $card-font-color: #525252;
-$card-back-ground: #d2d2d2;
+// $card-back-ground: #d2d2d2;
 $card-body__ic-chip-color: burlywood;
 
 .card {
@@ -16,7 +16,7 @@ $card-body__ic-chip-color: burlywood;
   align-items: flex-start;
 
   color: $card-font-color;
-  background-color: $card-back-ground;
+  // background-color: $card-back-ground;
 }
 
 .card-header {

@@ -67,3 +67,33 @@
     margin: 0.3rem;
   }
 }
+
+.card-list {
+  width: 22rem;
+  height: 16rem;
+  background-color: white;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 1rem 1rem;
+}
+
+.card-company-item {
+  width: 5rem;
+
+  &__color {
+    border-color: transparent;
+    border-radius: 1rem;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+  }
+  &__name {
+    line-height: 0.4rem;
+    font-size: 0.9rem;
+  }
+}
