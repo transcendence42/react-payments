@@ -10,13 +10,8 @@
     margin-top: 1.2rem;
     margin-left: 1.2rem;
   }
-  &__header-title {
-  }
   &__header-button {
     border: none;
-  }
-  &__body {
-    /* padding: 1rem; */
   }
   &__footer {
     padding: 1rem;
@@ -28,10 +23,6 @@
 }
 
 .card-form__body-number {
-  &-label {
-    font-size: 0.9rem;
-    line-height: 0.88rem;
-  }
   &-input:nth-child(1) {
     margin-left: 1rem;
   }
@@ -53,11 +44,26 @@
   }
 }
 
-.card-form__body-expiration {
-  &-date-input:nth-child(1) {
+.card-form__body-expiration-date {
+  &-input {
+    margin: 0.3rem;
   }
-  &-date-input:nth-child(2) {
+}
+
+.card-form__body-owner-name {
+  &-input {
+    margin: 0.3rem;
   }
-  &-seperator {
+}
+
+.card-form__body-cvc {
+  &-input {
+    margin: 0.3rem;
+  }
+}
+
+.card-form__body-password {
+  &-input {
+    margin: 0.3rem;
   }
 }
