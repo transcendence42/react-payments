@@ -8,7 +8,7 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <div className="app__layout">
-        <Router>
+        <Router basename="/react-payments">
           <Switch>
             <Route exact path={[ROUTE.HOME, ROUTE.CARD_LIST]}>
               <CardForm />
