@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, Button, Input, InputForm, Portal } from '../../Components';
 import './CardForm.scss';
 
@@ -133,6 +133,11 @@ const CardCompanyItem = ({ color, name, onClick }: { color: string; name: string
   );
 };
 
+interface CardModalProps {
+  color: string;
+  name: string;
+}
+
 const CardModal = ({ data, onClick }: { data: CardModalProps[]; onClick?: any }) => {
   return (
     <Portal>
@@ -147,60 +152,37 @@ const CardModal = ({ data, onClick }: { data: CardModalProps[]; onClick?: any })
   );
 };
 
-interface CardModalProps {
-  color: string;
-  name: string;
-}
-
 interface CardFormPresenterProps {
   data: CardModalProps[];
+  cardColor: string;
+  cardHeaderText: string;
+  cardBodyNumberFirst: string;
+  cardBodyNumberSecond: string;
+  cardBodyNumberThird: string;
+  cardBodyNumberFourth: string;
+  cardFooterMonth: string;
+  cardFooterYear: string;
+  cardFooterName: string;
+  openPortal: boolean;
+  handleChangeCardInfo: any;
+  handleClickCardCompanyItem: any;
 }
 
-const CardFormPresenter = ({ data }: CardFormPresenterProps) => {
-  const [cardFormInputs, setCardFormInputs] = useState({
-    companyName: '',
-    companyColor: '',
-    numberFirst: '',
-    numberSecond: '',
-    numberThird: '',
-    numberFourth: '',
-    expirationDateMonth: '',
-    expirationDateYear: '',
-    ownerName: '',
-    cvc: '',
-    passwordFirst: '',
-    passwordSecond: '',
-    passwordThird: '',
-    passwordFourth: '',
-    nickname: '',
-    openPortal: false,
-  });
-
-  useEffect(() => {
-    if (cardFormInputs.numberFirst.length === 4 && cardFormInputs.numberSecond.length === 4) {
-      setCardFormInputs((prev) => ({ ...prev, openPortal: true }));
-    }
-    return () => {
-      setCardFormInputs((prev) => ({ ...prev, openPortal: false }));
-    };
-  }, [cardFormInputs.numberFirst, cardFormInputs.numberSecond]);
-
-  const handleChangeCardInfo = (e: Event) => {
-    const { value, name } = e.target as HTMLInputElement;
-    setCardFormInputs((prev) => ({ ...prev, [name]: value }));
-    console.log(cardFormInputs);
-  };
-
-  const handleClickCardCompanyItem = (e: any) => {
-    e.persist();
-    setCardFormInputs((prev) => ({
-      ...prev,
-      companyName: e.target.dataset.company,
-      companyColor: e.target.dataset.color,
-      openPortal: false,
-    }));
-  };
-
+const CardFormPresenter = ({
+  data,
+  cardColor,
+  cardHeaderText,
+  cardBodyNumberFirst,
+  cardBodyNumberSecond,
+  cardBodyNumberThird,
+  cardBodyNumberFourth,
+  cardFooterMonth,
+  cardFooterYear,
+  cardFooterName,
+  openPortal,
+  handleChangeCardInfo,
+  handleClickCardCompanyItem,
+}: CardFormPresenterProps) => {
   return (
     <div className="card-form">
       <div className="card-form__header">
@@ -211,15 +193,15 @@ const CardFormPresenter = ({ data }: CardFormPresenterProps) => {
       </div>
       <div className="card-form__body">
         <Card
-          cardColor={cardFormInputs.companyColor}
-          cardHeaderText={cardFormInputs.companyName}
-          cardBodyNumberFirst={cardFormInputs.numberFirst}
-          cardBodyNumberSecond={cardFormInputs.numberSecond}
-          cardBodyNumberThird={cardFormInputs.numberThird}
-          cardBodyNumberFourth={cardFormInputs.numberFourth}
-          cardFooterMonth={cardFormInputs.expirationDateMonth}
-          cardFooterYear={cardFormInputs.expirationDateYear}
-          cardFooterName={cardFormInputs.ownerName}
+          cardColor={cardColor}
+          cardHeaderText={cardHeaderText}
+          cardBodyNumberFirst={cardBodyNumberFirst}
+          cardBodyNumberSecond={cardBodyNumberSecond}
+          cardBodyNumberThird={cardBodyNumberThird}
+          cardBodyNumberFourth={cardBodyNumberFourth}
+          cardFooterMonth={cardFooterMonth}
+          cardFooterYear={cardFooterYear}
+          cardFooterName={cardFooterName}
         ></Card>
         <CardFormBodyNumber onChange={handleChangeCardInfo} />
         <CardFormExpirationDate onChange={handleChangeCardInfo} />
@@ -232,7 +214,7 @@ const CardFormPresenter = ({ data }: CardFormPresenterProps) => {
           제출 완료
         </Button>
       </div>
-      {cardFormInputs.openPortal ? <CardModal data={data} onClick={handleClickCardCompanyItem} /> : ''}
+      {openPortal ? <CardModal data={data} onClick={handleClickCardCompanyItem} /> : ''}
     </div>
   );
 };
