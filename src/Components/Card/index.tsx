@@ -10,25 +10,32 @@ const CardHeader = ({ children }: { children: string | undefined }) => {
 };
 
 interface CardBodyProps {
-  cardNumber?: string | undefined;
+  cardBodyNumberFirst: string | undefined;
+  cardBodyNumberSecond: string | undefined;
+  cardBodyNumberThird: string | undefined;
+  cardBodyNumberFourth: string | undefined;
 }
 
-const chunkString = (str: string, length: number) => {
-  return str.match(new RegExp('.{1,' + length + '}', 'g'));
-};
-
-const CardBody = ({ cardNumber = '' }: CardBodyProps) => {
-  const cardNumberLength = cardNumber.length;
-  if (cardNumberLength > 16) {
-    cardNumber = cardNumber.slice(0, 8).padEnd(16, '*');
-  } else if (cardNumberLength > 8) {
-    cardNumber = cardNumber.slice(0, 8).padEnd(cardNumberLength, '*');
-  }
-  const cardNumberList = chunkString(cardNumber.padEnd(16, '_'), 4);
+const CardBody = ({
+  cardBodyNumberFirst = '',
+  cardBodyNumberSecond = '',
+  cardBodyNumberThird = '',
+  cardBodyNumberFourth = '',
+}: CardBodyProps) => {
   return (
     <div className="card-body">
       <div className="card-body__ic-chip"></div>
-      <div className="card-body__number">{cardNumberList ? cardNumberList.join('-') : ''}</div>
+      <div className="card-body__number">
+        {[
+          cardBodyNumberFirst.padEnd(4, '_'),
+          '-',
+          cardBodyNumberSecond.padEnd(4, '_'),
+          '-',
+          '*'.repeat(cardBodyNumberThird.length).padEnd(4, '_'),
+          '-',
+          '*'.repeat(cardBodyNumberFourth.length).padEnd(4, '_'),
+        ].join('')}
+      </div>
     </div>
   );
 };
@@ -57,7 +64,10 @@ export interface CardProps {
   onClick?: any;
   onKeyUp?: any;
   cardHeaderText?: string;
-  cardBodyCardNumber?: string;
+  cardBodyNumberFirst?: string;
+  cardBodyNumberSecond?: string;
+  cardBodyNumberThird?: string;
+  cardBodyNumberFourth?: string;
   cardFooterName?: string;
   cardFooterMonth?: string;
   cardFooterYear?: string;
@@ -67,7 +77,10 @@ export const Card = ({
   onClick,
   onKeyUp,
   cardHeaderText,
-  cardBodyCardNumber,
+  cardBodyNumberFirst,
+  cardBodyNumberSecond,
+  cardBodyNumberThird,
+  cardBodyNumberFourth,
   cardFooterName,
   cardFooterMonth,
   cardFooterYear,
@@ -76,7 +89,12 @@ export const Card = ({
   return (
     <div className="card" onClick={onClick} role="button" tabIndex={0} onKeyUp={onKeyUp} {...rest}>
       <CardHeader>{cardHeaderText}</CardHeader>
-      <CardBody cardNumber={cardBodyCardNumber}></CardBody>
+      <CardBody
+        cardBodyNumberFirst={cardBodyNumberFirst}
+        cardBodyNumberSecond={cardBodyNumberSecond}
+        cardBodyNumberThird={cardBodyNumberThird}
+        cardBodyNumberFourth={cardBodyNumberFourth}
+      ></CardBody>
       <CardFooter name={cardFooterName} month={cardFooterMonth} year={cardFooterYear}></CardFooter>
     </div>
   );
