@@ -37,6 +37,7 @@ export interface InputProps {
     | 'url'
     | 'week'
     | 'datetime';
+  autoFocus?: boolean;
 }
 
 const Input = React.forwardRef(

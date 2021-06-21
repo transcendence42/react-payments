@@ -1,8 +1,29 @@
 import React from 'react';
 import { Card, Button, Input, InputForm, Portal } from '../../Components';
+import {
+  CARD_NUMBER_MAX_LENGTH,
+  CARD_EXPIRATION_DATE_MAX_LENGTH,
+  CARD_CVC_MAX_LENGTH,
+  CARD_PASSWORD_MAX_LENGTH,
+  CARD_OWNER_NAME_MAX_LENGTH,
+} from '../../Constants';
 import './CardForm.scss';
 
-const CardFormBodyNumber = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
+const CardFormBodyNumber = ({
+  refNumberFirst,
+  refNumberSecond,
+  refNumberThird,
+  refNumberFourth,
+  errorMessage,
+  onChange,
+}: {
+  refNumberFirst: React.MutableRefObject<HTMLInputElement | null>;
+  refNumberSecond: React.MutableRefObject<HTMLInputElement | null>;
+  refNumberThird: React.MutableRefObject<HTMLInputElement | null>;
+  refNumberFourth: React.MutableRefObject<HTMLInputElement | null>;
+  errorMessage: string | undefined;
+  onChange: any;
+}) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-number-container"
@@ -14,7 +35,8 @@ const CardFormBodyNumber = ({ errorMessage, onChange }: { errorMessage: string |
         name="numberFirst"
         onChange={onChange}
         placeholder="_ _ _ _"
-        maxLength={4}
+        maxLength={CARD_NUMBER_MAX_LENGTH}
+        ref={refNumberFirst}
       />
       <span className="card-form__body-number-seperator">-</span>
       <Input
@@ -22,7 +44,8 @@ const CardFormBodyNumber = ({ errorMessage, onChange }: { errorMessage: string |
         name="numberSecond"
         onChange={onChange}
         placeholder="_ _ _ _"
-        maxLength={4}
+        maxLength={CARD_NUMBER_MAX_LENGTH}
+        ref={refNumberSecond}
       />
       <span className="card-form__body-number-seperator">-</span>
       <Input
@@ -30,7 +53,8 @@ const CardFormBodyNumber = ({ errorMessage, onChange }: { errorMessage: string |
         name="numberThird"
         onChange={onChange}
         placeholder="_ _ _ _"
-        maxLength={4}
+        maxLength={CARD_NUMBER_MAX_LENGTH}
+        ref={refNumberThird}
       />
       <span className="card-form__body-number-seperator">-</span>
       <Input
@@ -38,13 +62,24 @@ const CardFormBodyNumber = ({ errorMessage, onChange }: { errorMessage: string |
         name="numberFourth"
         onChange={onChange}
         placeholder="_ _ _ _"
-        maxLength={4}
+        maxLength={CARD_NUMBER_MAX_LENGTH}
+        ref={refNumberFourth}
       />
     </InputForm>
   );
 };
 
-const CardFormExpirationDate = ({ onChange, errorMessage }: { onChange: any; errorMessage: string | undefined }) => {
+const CardFormExpirationDate = ({
+  refExpirationDateMonth,
+  refExpirationDateYear,
+  onChange,
+  errorMessage,
+}: {
+  refExpirationDateMonth: React.MutableRefObject<HTMLInputElement | null>;
+  refExpirationDateYear: React.MutableRefObject<HTMLInputElement | null>;
+  onChange: any;
+  errorMessage: string | undefined;
+}) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-expiration-date-container"
@@ -58,7 +93,8 @@ const CardFormExpirationDate = ({ onChange, errorMessage }: { onChange: any; err
         onChange={onChange}
         width="1.5rem"
         placeholder="MM"
-        maxLength={2}
+        maxLength={CARD_EXPIRATION_DATE_MAX_LENGTH}
+        ref={refExpirationDateMonth}
       />
       <span className="card-form__body-expiration-date-seperator">/</span>
       <Input
@@ -67,13 +103,22 @@ const CardFormExpirationDate = ({ onChange, errorMessage }: { onChange: any; err
         onChange={onChange}
         width="1.5rem"
         placeholder="YY"
-        maxLength={2}
+        maxLength={CARD_EXPIRATION_DATE_MAX_LENGTH}
+        ref={refExpirationDateYear}
       />
     </InputForm>
   );
 };
 
-const CardFormOwnerName = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
+const CardFormOwnerName = ({
+  refOwnerName,
+  errorMessage,
+  onChange,
+}: {
+  refOwnerName: React.MutableRefObject<HTMLInputElement | null>;
+  errorMessage: string | undefined;
+  onChange: any;
+}) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-owner-name-container"
@@ -86,13 +131,22 @@ const CardFormOwnerName = ({ errorMessage, onChange }: { errorMessage: string | 
         onChange={onChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         width="19rem"
-        maxLength={18}
+        maxLength={CARD_OWNER_NAME_MAX_LENGTH}
+        ref={refOwnerName}
       />
     </InputForm>
   );
 };
 
-const CardFormCVC = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
+const CardFormCVC = ({
+  refCvc,
+  errorMessage,
+  onChange,
+}: {
+  refCvc: React.MutableRefObject<HTMLInputElement | null>;
+  errorMessage: string | undefined;
+  onChange: any;
+}) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-cvc-container"
@@ -106,13 +160,28 @@ const CardFormCVC = ({ errorMessage, onChange }: { errorMessage: string | undefi
         onChange={onChange}
         placeholder="CVC"
         width="2rem"
-        maxLength={3}
+        maxLength={CARD_CVC_MAX_LENGTH}
+        ref={refCvc}
       />
     </InputForm>
   );
 };
 
-const CardFormPassword = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
+const CardFormPassword = ({
+  refPasswordFirst,
+  refPasswordSecond,
+  refPasswordThird,
+  refPasswordFourth,
+  errorMessage,
+  onChange,
+}: {
+  refPasswordFirst: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordSecond: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordThird: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordFourth: React.MutableRefObject<HTMLInputElement | null>;
+  errorMessage: string | undefined;
+  onChange: any;
+}) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-password-container"
@@ -126,7 +195,8 @@ const CardFormPassword = ({ errorMessage, onChange }: { errorMessage: string | u
         onChange={onChange}
         placeholder="_"
         width="1rem"
-        maxLength={1}
+        maxLength={CARD_PASSWORD_MAX_LENGTH}
+        ref={refPasswordFirst}
       />
       <Input
         className="card-form__body-password-input"
@@ -134,7 +204,8 @@ const CardFormPassword = ({ errorMessage, onChange }: { errorMessage: string | u
         onChange={onChange}
         placeholder="_"
         width="1rem"
-        maxLength={1}
+        maxLength={CARD_PASSWORD_MAX_LENGTH}
+        ref={refPasswordSecond}
       />
       <Input
         className="card-form__body-password-input"
@@ -142,7 +213,8 @@ const CardFormPassword = ({ errorMessage, onChange }: { errorMessage: string | u
         onChange={onChange}
         placeholder="_"
         width="1rem"
-        maxLength={1}
+        maxLength={CARD_PASSWORD_MAX_LENGTH}
+        ref={refPasswordThird}
       />
       <Input
         className="card-form__body-password-input"
@@ -150,7 +222,8 @@ const CardFormPassword = ({ errorMessage, onChange }: { errorMessage: string | u
         onChange={onChange}
         placeholder="_"
         width="1rem"
-        maxLength={1}
+        maxLength={CARD_PASSWORD_MAX_LENGTH}
+        ref={refPasswordFourth}
       />
     </InputForm>
   );
@@ -209,6 +282,18 @@ interface CardFormPresenterProps {
   cardFooterExpirationDateErrorMessage?: string;
   cardCVCErrorMessage?: string;
   cardPasswordErrorMessage?: string;
+  refNumberFirst: React.MutableRefObject<HTMLInputElement | null>;
+  refNumberSecond: React.MutableRefObject<HTMLInputElement | null>;
+  refNumberThird: React.MutableRefObject<HTMLInputElement | null>;
+  refNumberFourth: React.MutableRefObject<HTMLInputElement | null>;
+  refExpirationDateMonth: React.MutableRefObject<HTMLInputElement | null>;
+  refExpirationDateYear: React.MutableRefObject<HTMLInputElement | null>;
+  refOwnerName: React.MutableRefObject<HTMLInputElement | null>;
+  refCvc: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordFirst: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordSecond: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordThird: React.MutableRefObject<HTMLInputElement | null>;
+  refPasswordFourth: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 const CardFormPresenter = ({
@@ -230,6 +315,18 @@ const CardFormPresenter = ({
   cardFooterExpirationDateErrorMessage,
   cardCVCErrorMessage,
   cardPasswordErrorMessage,
+  refNumberFirst,
+  refNumberSecond,
+  refNumberThird,
+  refNumberFourth,
+  refExpirationDateMonth,
+  refExpirationDateYear,
+  refOwnerName,
+  refCvc,
+  refPasswordFirst,
+  refPasswordSecond,
+  refPasswordThird,
+  refPasswordFourth,
 }: CardFormPresenterProps) => {
   return (
     <div className="card-form">
@@ -251,11 +348,34 @@ const CardFormPresenter = ({
           cardFooterYear={cardFooterYear}
           cardFooterName={cardFooterName}
         ></Card>
-        <CardFormBodyNumber errorMessage={cardBodyNumberErrorMessage} onChange={handleChangeCardInfo} />
-        <CardFormExpirationDate errorMessage={cardFooterExpirationDateErrorMessage} onChange={handleChangeCardInfo} />
-        <CardFormOwnerName errorMessage={cardFooterNameErrorMessage} onChange={handleChangeCardInfo} />
-        <CardFormCVC errorMessage={cardCVCErrorMessage} onChange={handleChangeCardInfo} />
-        <CardFormPassword errorMessage={cardPasswordErrorMessage} onChange={handleChangeCardInfo} />
+        <CardFormBodyNumber
+          refNumberFirst={refNumberFirst}
+          refNumberSecond={refNumberSecond}
+          refNumberThird={refNumberThird}
+          refNumberFourth={refNumberFourth}
+          errorMessage={cardBodyNumberErrorMessage}
+          onChange={handleChangeCardInfo}
+        />
+        <CardFormExpirationDate
+          refExpirationDateMonth={refExpirationDateMonth}
+          refExpirationDateYear={refExpirationDateYear}
+          errorMessage={cardFooterExpirationDateErrorMessage}
+          onChange={handleChangeCardInfo}
+        />
+        <CardFormOwnerName
+          refOwnerName={refOwnerName}
+          errorMessage={cardFooterNameErrorMessage}
+          onChange={handleChangeCardInfo}
+        />
+        <CardFormCVC refCvc={refCvc} errorMessage={cardCVCErrorMessage} onChange={handleChangeCardInfo} />
+        <CardFormPassword
+          refPasswordFirst={refPasswordFirst}
+          refPasswordSecond={refPasswordSecond}
+          refPasswordThird={refPasswordThird}
+          refPasswordFourth={refPasswordFourth}
+          errorMessage={cardPasswordErrorMessage}
+          onChange={handleChangeCardInfo}
+        />
       </div>
       <div className="card-form__footer">
         <Button className="card-form__footer-button" type="submit">
