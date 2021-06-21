@@ -1,5 +1,4 @@
 import React from 'react';
-// import React, { forwardRef } from 'react';
 
 import styles from './Input.module.scss';
 import classNames from 'classnames/bind';
@@ -40,39 +39,36 @@ export interface InputProps {
     | 'datetime';
 }
 
-// const Input = forwardRef(({ className = '', placeholder = '', width = '' }: InputProps, ref: any) => {
-//   return (
-//     <input
-//       className={cx('input-container', className)}
-//       placeholder={placeholder}
-//       style={{ width: `${width}` }}
-//       ref={ref}
-//     />
-//   );
-// });
+const Input = React.forwardRef(
+  (
+    {
+      className = '',
+      name = '',
+      onChange,
+      placeholder = '',
+      width = '',
+      maxLength,
+      type = 'text',
+      ...rest
+    }: InputProps,
+    ref?: React.Ref<HTMLInputElement>,
+  ) => {
+    return (
+      <input
+        className={cx('input-container', className)}
+        name={name}
+        onChange={onChange}
+        placeholder={placeholder}
+        style={{ width: `${width}` }}
+        type={type}
+        maxLength={maxLength ? maxLength : INPUT_MAXLENGTH}
+        {...rest}
+        ref={ref ? ref : null}
+      />
+    );
+  },
+);
 
-// Input.displayName = 'holee-input';
-
-const Input = ({
-  className = '',
-  name = '',
-  onChange,
-  placeholder = '',
-  width = '',
-  maxLength,
-  type = 'text',
-}: InputProps) => {
-  return (
-    <input
-      className={cx('input-container', className)}
-      name={name}
-      onChange={onChange}
-      placeholder={placeholder}
-      style={{ width: `${width}` }}
-      type={type}
-      maxLength={maxLength ? maxLength : INPUT_MAXLENGTH}
-    />
-  );
-};
+Input.displayName = 'holee-input';
 
 export { Input };
