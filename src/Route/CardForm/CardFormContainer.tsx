@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CardFormPresenter from './CardFormPresenter';
+import { ERROR } from '../../Constants';
 
 const data = [
   { name: 'NH농협', color: 'yellow' },
@@ -30,6 +31,20 @@ const CardFormContainer = () => {
     passwordFourth: '',
     nickname: '',
     openPortal: false,
+    errorMessage: {
+      numberFirst: ERROR.VOID_INPUT,
+      numberSecond: ERROR.VOID_INPUT,
+      numberThird: ERROR.VOID_INPUT,
+      numberFourth: ERROR.VOID_INPUT,
+      expirationDateMonth: ERROR.VOID_INPUT,
+      expirationDateYear: ERROR.VOID_INPUT,
+      ownerName: ERROR.VOID_INPUT,
+      cvc: ERROR.VOID_INPUT,
+      passwordFirst: ERROR.VOID_INPUT,
+      passwordSecond: ERROR.VOID_INPUT,
+      passwordThird: ERROR.VOID_INPUT,
+      passwordFourth: ERROR.VOID_INPUT,
+    },
   });
 
   useEffect(() => {
@@ -41,10 +56,88 @@ const CardFormContainer = () => {
     };
   }, [cardFormInputs.numberFirst, cardFormInputs.numberSecond]);
 
+  const changeCurrentInput = (target: HTMLInputElement, value: string) => {
+    target.value = value;
+  };
+
+  const checkErrorMessage = (name: string, value: string): string => {
+    // const { numberFirst, numberSecond, numberThird, numberFourth } = cardFormInputs;
+    switch (name) {
+      case 'numberFirst':
+      case 'numberSecond':
+      case 'numberThird':
+      case 'numberFourth':
+        break;
+      case 'expirationDateMonth':
+      case 'expirationDateYear':
+        if (name === 'expirationDateMonth' && (0 >= Number(value) || 12 < Number(value))) {
+          return ERROR.INVALID_EXPIRATION_DATE_MONTH;
+        }
+        break;
+      case 'cvc':
+        break;
+      case 'passwordFirst':
+        break;
+      case 'passwordSecond':
+        break;
+      case 'passwordThird':
+        break;
+      case 'passwordFourth':
+        break;
+      default:
+        return '';
+    }
+    return '';
+  };
+
   const handleChangeCardInfo = (e: Event) => {
-    const { value, name } = e.target as HTMLInputElement;
-    setCardFormInputs((prev) => ({ ...prev, [name]: value }));
-    console.log(cardFormInputs);
+    const target = e.target as HTMLInputElement;
+    const { value, name } = target;
+    const prevValue = value.substring(0, value.length - 1);
+
+    if (
+      [
+        'numberFirst',
+        'numberSecond',
+        'numberThird',
+        'numberFourth',
+        'cvc',
+        'passwordFirst',
+        'passwordSecond',
+        'passwordThird',
+        'passwordFourth',
+      ].includes(name)
+    ) {
+      if (!(Number.isSafeInteger(Number(value)) && Number(value) > 0)) {
+        changeCurrentInput(target, prevValue);
+        setCardFormInputs((prev) => ({ ...prev, [name]: prevValue }));
+        return;
+      }
+    } else if (['expirationDateMonth'].includes(name)) {
+      if (!(Number.isSafeInteger(Number(value)) && Number(value) > 0)) {
+        changeCurrentInput(target, prevValue);
+        setCardFormInputs((prev) => ({ ...prev, [name]: prevValue }));
+        return;
+      }
+    } else if (['expirationDateYear'].includes(name)) {
+      if (!(Number.isSafeInteger(Number(value)) && Number(value) > 0)) {
+        changeCurrentInput(target, prevValue);
+        setCardFormInputs((prev) => ({ ...prev, [name]: prevValue }));
+        return;
+      }
+    } else if (['ownerName'].includes(name)) {
+      if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/.test(value)) {
+        changeCurrentInput(target, prevValue);
+        setCardFormInputs((prev) => ({ ...prev, [name]: prevValue }));
+        return;
+      }
+      changeCurrentInput(target, value.toUpperCase());
+    }
+    setCardFormInputs((prev) => ({
+      ...prev,
+      [name]: value,
+      errorMessage: { ...prev.errorMessage, [name]: checkErrorMessage(name, value) },
+    }));
   };
 
   const handleClickCardCompanyItem = (e: any) => {
@@ -71,6 +164,11 @@ const CardFormContainer = () => {
       handleChangeCardInfo={handleChangeCardInfo}
       handleClickCardCompanyItem={handleClickCardCompanyItem}
       openPortal={cardFormInputs.openPortal}
+      cardBodyNumberErrorMessage={cardFormInputs.errorMessage.numberFirst}
+      cardFooterNameErrorMessage={cardFormInputs.errorMessage.ownerName}
+      cardFooterExpirationDateErrorMessage={cardFormInputs.errorMessage.expirationDateMonth}
+      cardCVCErrorMessage={cardFormInputs.errorMessage.cvc}
+      cardPasswordErrorMessage={cardFormInputs.errorMessage.passwordFirst}
     />
   );
 };

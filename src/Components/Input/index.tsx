@@ -5,6 +5,7 @@ import styles from './Input.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
+const INPUT_MAXLENGTH = 1000;
 
 export interface InputProps {
   className?: string | undefined;
@@ -69,7 +70,7 @@ const Input = ({
       placeholder={placeholder}
       style={{ width: `${width}` }}
       type={type}
-      maxLength={maxLength}
+      maxLength={maxLength ? maxLength : INPUT_MAXLENGTH}
     />
   );
 };

@@ -49,7 +49,7 @@ interface CardFooterProps {
 const CardFooter = ({ name, month, year }: CardFooterProps) => {
   return (
     <div className="card-footer">
-      <span className="card-footer__name">{name ? name : 'NAME'}</span>
+      <span className="card-footer__name">{name ? name.toUpperCase() : 'NAME'}</span>
       <span className="card-footer__expiration-date">
         {month ? month : 'MM'}/{year ? year : 'YY'}
       </span>

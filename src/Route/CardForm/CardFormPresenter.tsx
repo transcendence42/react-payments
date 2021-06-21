@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, Button, Input, InputForm, Portal } from '../../Components';
 import './CardForm.scss';
 
-const CardFormBodyNumber = ({ onChange }: { onChange: any }) => {
+const CardFormBodyNumber = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-number-container"
       inputFormTitle="카드번호"
-      inputFormErrorMessage="error message"
+      inputFormErrorMessage={errorMessage ? errorMessage : ''}
     >
       <Input
         className="card-form__body-number-input"
@@ -44,13 +44,13 @@ const CardFormBodyNumber = ({ onChange }: { onChange: any }) => {
   );
 };
 
-const CardFormExpirationDate = ({ onChange }: { onChange: any }) => {
+const CardFormExpirationDate = ({ onChange, errorMessage }: { onChange: any; errorMessage: string | undefined }) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-expiration-date-container"
       inputFormTitle="만료일"
-      inputFormErrorMessage="error message"
-      containerWidth="5.6rem"
+      inputFormErrorMessage={errorMessage ? errorMessage : ''}
+      containerWidth="5.8rem"
     >
       <Input
         className="card-form__body-expiration-date-input"
@@ -73,12 +73,12 @@ const CardFormExpirationDate = ({ onChange }: { onChange: any }) => {
   );
 };
 
-const CardFormOwnerName = ({ onChange }: { onChange: any }) => {
+const CardFormOwnerName = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-owner-name-container"
       inputFormTitle="카드 소유자 이름(선택)"
-      inputFormErrorMessage="error message"
+      inputFormErrorMessage={errorMessage ? errorMessage : ''}
     >
       <Input
         className="card-form__body-owner-name-input"
@@ -86,18 +86,18 @@ const CardFormOwnerName = ({ onChange }: { onChange: any }) => {
         onChange={onChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         width="19rem"
-        maxLength={20}
+        maxLength={18}
       />
     </InputForm>
   );
 };
 
-const CardFormCVC = ({ onChange }: { onChange: any }) => {
+const CardFormCVC = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-cvc-container"
       inputFormTitle="보안 코드(CVC/CVV)"
-      inputFormErrorMessage="error message"
+      inputFormErrorMessage={errorMessage ? errorMessage : ''}
       containerWidth="3.2rem"
     >
       <Input
@@ -112,12 +112,12 @@ const CardFormCVC = ({ onChange }: { onChange: any }) => {
   );
 };
 
-const CardFormPassword = ({ onChange }: { onChange: any }) => {
+const CardFormPassword = ({ errorMessage, onChange }: { errorMessage: string | undefined; onChange: any }) => {
   return (
     <InputForm
       inputContainerClassName="card-form__body-password-container"
       inputFormTitle="카드 비밀번호"
-      inputFormErrorMessage="error message"
+      inputFormErrorMessage={errorMessage ? errorMessage : ''}
       containerWidth="8.5rem"
     >
       <Input
@@ -204,6 +204,11 @@ interface CardFormPresenterProps {
   openPortal: boolean;
   handleChangeCardInfo: any;
   handleClickCardCompanyItem: any;
+  cardBodyNumberErrorMessage?: string;
+  cardFooterNameErrorMessage?: string;
+  cardFooterExpirationDateErrorMessage?: string;
+  cardCVCErrorMessage?: string;
+  cardPasswordErrorMessage?: string;
 }
 
 const CardFormPresenter = ({
@@ -220,6 +225,11 @@ const CardFormPresenter = ({
   openPortal,
   handleChangeCardInfo,
   handleClickCardCompanyItem,
+  cardBodyNumberErrorMessage,
+  cardFooterNameErrorMessage,
+  cardFooterExpirationDateErrorMessage,
+  cardCVCErrorMessage,
+  cardPasswordErrorMessage,
 }: CardFormPresenterProps) => {
   return (
     <div className="card-form">
@@ -241,11 +251,11 @@ const CardFormPresenter = ({
           cardFooterYear={cardFooterYear}
           cardFooterName={cardFooterName}
         ></Card>
-        <CardFormBodyNumber onChange={handleChangeCardInfo} />
-        <CardFormExpirationDate onChange={handleChangeCardInfo} />
-        <CardFormOwnerName onChange={handleChangeCardInfo} />
-        <CardFormCVC onChange={handleChangeCardInfo} />
-        <CardFormPassword onChange={handleChangeCardInfo} />
+        <CardFormBodyNumber errorMessage={cardBodyNumberErrorMessage} onChange={handleChangeCardInfo} />
+        <CardFormExpirationDate errorMessage={cardFooterExpirationDateErrorMessage} onChange={handleChangeCardInfo} />
+        <CardFormOwnerName errorMessage={cardFooterNameErrorMessage} onChange={handleChangeCardInfo} />
+        <CardFormCVC errorMessage={cardCVCErrorMessage} onChange={handleChangeCardInfo} />
+        <CardFormPassword errorMessage={cardPasswordErrorMessage} onChange={handleChangeCardInfo} />
       </div>
       <div className="card-form__footer">
         <Button className="card-form__footer-button" type="submit">
