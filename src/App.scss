@@ -1,0 +1,12 @@
+.app {
+  text-align: center;
+
+  &__layout {
+    background-color: #fff;
+    width: 24rem;
+    height: 50rem;
+    position: relative;
+
+    border-radius: 1rem;
+  }
+}

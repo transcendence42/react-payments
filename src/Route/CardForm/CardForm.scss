@@ -1,0 +1,99 @@
+.card-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__header {
+    align-self: flex-start;
+    margin-top: 1.2rem;
+    margin-left: 1.2rem;
+  }
+  &__header-button {
+    border: none;
+  }
+  &__footer {
+    padding: 1rem;
+  }
+  &__footer-button {
+    width: 5rem;
+    height: 2rem;
+  }
+}
+
+.card-form__body-number {
+  &-input:nth-child(1) {
+    margin-left: 1rem;
+  }
+  &-input:nth-child(2n-1) {
+    grid-column-start: 1;
+    grid-column-end: span 1;
+
+    margin-top: 0.3rem;
+    width: 3rem;
+  }
+  &-input:nth-child(2n) {
+    grid-column-start: 2;
+    grid-column-end: span 1;
+
+    width: 1rem;
+  }
+  &-seperator {
+    margin: 0.5rem;
+  }
+}
+
+.card-form__body-expiration-date {
+  &-input {
+    margin: 0.3rem;
+  }
+}
+
+.card-form__body-owner-name {
+  &-input {
+    margin: 0.3rem;
+  }
+}
+
+.card-form__body-cvc {
+  &-input {
+    margin: 0.3rem;
+  }
+}
+
+.card-form__body-password {
+  &-input {
+    margin: 0.3rem;
+  }
+}
+
+.card-list {
+  width: 22rem;
+  height: 16rem;
+  background-color: white;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 1rem 1rem;
+}
+
+.card-company-item {
+  width: 5rem;
+
+  &__color {
+    border-color: transparent;
+    border-radius: 1rem;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+  }
+  &__name {
+    line-height: 0.4rem;
+    font-size: 0.9rem;
+  }
+}

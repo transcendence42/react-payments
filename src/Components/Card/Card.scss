@@ -1,0 +1,64 @@
+$card-font-color: #525252;
+// $card-back-ground: #d2d2d2;
+$card-body__ic-chip-color: burlywood;
+
+.card {
+  width: 15rem;
+  height: 8rem;
+  margin: 1rem;
+  margin-bottom: 3rem;
+  padding: 1.6rem;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  color: $card-font-color;
+  // background-color: $card-back-ground;
+}
+
+.card-header {
+  flex-grow: 1;
+
+  &__text {
+    font-weight: bold;
+  }
+}
+
+.card-body {
+  margin-top: 1rem;
+
+  flex-grow: 2;
+
+  &__ic-chip {
+    width: 3rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+
+    border-radius: 0.3rem;
+    background-color: $card-body__ic-chip-color;
+  }
+  &__number {
+    margin-bottom: 1rem;
+  }
+}
+
+.card-footer {
+  width: 100%;
+
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 3fr 3rem;
+  text-align: left;
+
+  &__name {
+    grid-column-start: 1;
+    grid-column-end: span 1;
+  }
+  &__expiration-date {
+    grid-column-start: 2;
+    grid-column-end: span 1;
+  }
+}
